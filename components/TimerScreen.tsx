@@ -1,12 +1,8 @@
-import { Button, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { TimerPicker as _TimerPicker} from 'react-native-timer-picker';
 import { TimerPickerModal } from 'react-native-timer-picker';
 import { Audio } from "expo-av";
-
-
-const TimerPicker = _TimerPicker as unknown as React.ComponentType<any>;
 
 
 export default function TimerScreen() {
