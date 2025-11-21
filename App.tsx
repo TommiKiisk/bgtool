@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './HomeScreen'
-import SettingScreen from './TimerScreen'
+import HomeScreen from './components/HomeScreen'
+import SettingScreen from './components/TimerScreen'
 
 
 const Tab = createBottomTabNavigator();
