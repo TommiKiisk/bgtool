@@ -2,7 +2,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TimerPickerModal } from 'react-native-timer-picker';
-import { Audio } from "expo-av";
+import { useAudioPlayer } from "expo-audio";
 
 
 export default function TimerScreen() {
@@ -13,25 +13,10 @@ export default function TimerScreen() {
   const [isRunning, setIsRunning] = React.useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
-  const [sound, setSound] = React.useState<Audio.Sound | null>(null);
+  const audioSource = require("../assets/980363293.mp3");
+  const player = useAudioPlayer(audioSource);
 
-
-
-
-  async function playSound() {
-
-    if (sound) {
-      await sound.stopAsync();
-      await sound.unloadAsync();
-    }
-
-    const { sound: newSound } = await Audio.Sound.createAsync(
-      require("../assets/980363293.mp3")
-    );
-
-    setSound(newSound);
-    await newSound.playAsync();
-  }
+  
 
 
 
@@ -42,7 +27,8 @@ export default function TimerScreen() {
       setRemaining((prev) => {
         if (prev <= 1) {
           setIsRunning(false);
-          playSound();
+          player.seekTo(0);
+          player.play()
           return 0;
         }
         return prev - 1;
@@ -54,8 +40,8 @@ export default function TimerScreen() {
   }, [isRunning, duration]);
 
   const nextTurn = async () => {
-    if (sound) {
-      await sound.stopAsync();
+    if (player.playing) {
+      await player.pause();
     }
     setRemaining(duration);
     setIsRunning(false);
