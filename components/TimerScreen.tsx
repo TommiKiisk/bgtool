@@ -35,9 +35,9 @@ export default function TimerScreen() {
       });
     }, 1000);
   
-
     return () => clearInterval(interval);
   }, [isRunning, duration]);
+
 
   const nextTurn = async () => {
     if (player.playing) {
@@ -47,12 +47,14 @@ export default function TimerScreen() {
     setIsRunning(false);
   };
 
+
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
+
 
   return (
     <View style={styles.container}>
@@ -92,6 +94,7 @@ export default function TimerScreen() {
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
+
       <TimerPickerModal
         visible={showPicker}
         setIsVisible={setShowPicker}
@@ -106,6 +109,7 @@ export default function TimerScreen() {
           setRemaining(totalSeconds);
           setShowPicker(false);
         }}
+
         modalTitle="Set time"
         onCancel={() => setShowPicker(false)}
         closeOnOverlayPress={true}
@@ -126,6 +130,7 @@ export default function TimerScreen() {
               width: 150,
           },
         }}
+        
         modalProps={{
           overlayOpacity: 0.2,
         }}

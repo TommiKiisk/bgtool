@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './components/HomeScreen'
 import SettingScreen from './components/TimerScreen'
+import Dice from './components/Dice';
 
 
 const Tab = createBottomTabNavigator();
@@ -13,6 +14,7 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Timer" component={SettingScreen} />
+        <Tab.Screen name="Dice" component={Dice} />
       </Tab.Navigator>
     </NavigationContainer>
   );
