@@ -16,7 +16,6 @@ const Tab = createBottomTabNavigator();
 function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeMain" component={HomeScreen} />
       <Stack.Screen name="RuleList" component={RuleListScreen} />
     </Stack.Navigator>
   );
