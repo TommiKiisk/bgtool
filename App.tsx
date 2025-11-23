@@ -31,7 +31,8 @@ export function HomeStack() {
   
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
+    <View >
+
       
       <NavigationContainer>
       <Tab.Navigator>
