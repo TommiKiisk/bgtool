@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Dice() {
@@ -11,6 +12,9 @@ export default function Dice() {
         const random = Math.floor(Math.random() * 6) + 1;
         setNumber(random);
     };
+
+      const navigation = useNavigation();
+
 
 
 
@@ -23,6 +27,8 @@ export default function Dice() {
             <MaterialCommunityIcons name={`dice-${number}-outline` as any} size={300} color="#000000ff" />
 
         </TouchableOpacity>
+
+            <Button title="Go back" onPress={() => navigation.goBack()} />
         </View>
     );
 }

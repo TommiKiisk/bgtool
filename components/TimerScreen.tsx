@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TimerPickerModal } from 'react-native-timer-picker';
 import { useAudioPlayer } from "expo-audio";
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function TimerScreen() {
@@ -15,6 +16,8 @@ export default function TimerScreen() {
 
   const audioSource = require("../assets/980363293.mp3");
   const player = useAudioPlayer(audioSource);
+
+  const navigation = useNavigation();
 
   
 
@@ -60,16 +63,17 @@ export default function TimerScreen() {
     <View style={styles.container}>
 
       <Text style={styles.time}>{formatTime(remaining)}</Text>
+      <View style={{ paddingBottom: 20 }}>
+        <Button 
+          title={isRunning ? "Pause" : "Start Turn"} 
+          onPress={() => setIsRunning(!isRunning)} 
+        />
 
-      <Button 
-        title={isRunning ? "Pause" : "Start Turn"} 
-        onPress={() => setIsRunning(!isRunning)} 
-      />
-
-      <Button 
-        title="Next Turn" 
-        onPress={nextTurn} 
-      />
+        <Button 
+          title="Next Turn" 
+          onPress={nextTurn} 
+        />
+      </View>
       
       <TouchableOpacity 
         activeOpacity={0.7}
@@ -135,6 +139,8 @@ export default function TimerScreen() {
           overlayOpacity: 0.2,
         }}
       />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      
     </View>
   );
 }
