@@ -2,6 +2,9 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import { Container } from './ui/Container';
+import { MedievalButton } from './ui/MedievalButton';
+import { Title } from './ui/Title';
 
 
 export default function Dice() {
@@ -20,29 +23,23 @@ export default function Dice() {
 
 
     return (
-        <View style={styles.container}>
-            <Text>Tap to roll</Text>
+        <Container>
+            <Title>Dice Roller</Title>
+            <Text className='font-medieval text-center mt-12 flex'>Tap to roll</Text>
+            
 
-        <TouchableOpacity onPress={rollDice} style={{marginTop: 20, padding: 0, backgroundColor: 'mediumseagreen', borderRadius: 5}}>
-            <MaterialCommunityIcons name={`dice-${number}-outline` as any} size={300} color="#000000ff" />
+        <TouchableOpacity onPress={rollDice} style={styles.dice}>
+            <MaterialCommunityIcons name={`dice-${number}-outline` as any} size={300} color="#251e1bff" />
 
         </TouchableOpacity>
 
-            <Button title="Go back" onPress={() => navigation.goBack()} />
-        </View>
+            <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
+        </Container>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
     dice: {
-        fontSize: 100,
-        fontWeight: 'bold',
-        marginBottom: 20,
+        marginTop: 20, marginBottom: 50, alignItems: "center", backgroundColor: '#728546ff', borderRadius: 30, borderWidth: 4, borderColor: '#3a2e2a'
     },
 });

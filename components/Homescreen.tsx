@@ -1,7 +1,11 @@
 import { View, Text, Button } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { MedievalButton } from "./ui/MedievalButton";
+import { Title } from "./ui/Title";
+import "../global.css";
+import { Container } from "./ui/Container";
 
 
 
@@ -17,12 +21,15 @@ type HomeNavProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function HomeScreen() {
     const navigation = useNavigation<HomeNavProp>();
+    const [dark, setDark] = useState(false);
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button onPress={() => navigation.navigate('RuleList')} title="List of games" />
-        <Button onPress={() => navigation.navigate('DiceScreen')} title="Throw Dice" />
-        <Button onPress={() => navigation.navigate('TimerScreen')} title="Timer" />
-    </View>
+    <Container>
+      <Title>Board Game Tool</Title>
+        <MedievalButton onPress={() => navigation.navigate('RuleList')} label="List of games" />
+        <MedievalButton onPress={() => navigation.navigate('DiceScreen')} label="Throw Dice" />
+        <MedievalButton onPress={() => navigation.navigate('TimerScreen')} label="Timer" />
+        {/*<MedievalButton label="Change theme" onPress={() => setDark(d => !d)} />*/}
+
+    </Container>
   );
 }

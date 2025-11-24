@@ -3,6 +3,9 @@ import { Text, TouchableOpacity, FlatList, Alert, TextInput, View, Button } from
 import { database } from "../firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
 import { onValue, push, ref } from "firebase/database";
+import { Container } from "./ui/Container";
+import { MedievalButton } from "./ui/MedievalButton";
+import { Title } from "./ui/Title";
 
 type Game = {
   id: string;
@@ -40,29 +43,37 @@ export default function RuleList() {
             push(ref(database, 'games/'), game);
             setGame({ name: '', rules: '' });
         }
-        else {
-            Alert.alert('Error', 'Type product and amount first');
-        }
     };
 
     return (
-      <View>
+      <Container>
+        <Title>List of Games
+        </Title>
+        <View className="w-full mb-6">
+            <Text className="font-medieval text-lg mb-1">Add a new game:</Text>
+        <TextInput
+            className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink dark:text-parchment"
+            placeholder="Game Name"
+            value={game.name}
+            onChangeText={(text: string) => setGame({ ...game, name: text })}/>
+
+        
+        <MedievalButton label="Save Game" onPress={handleSave} />
+        </View>
+
         <FlatList<Game>
+            className="flex-1 w-full touchpan-y"
             data={games}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => 
                     navigation.navigate("GameRule", { gameId: item.id })
                 }>
-                    <Text>{item.name}</Text>
+                    <Text className="flex-1 font-medieval text-xl mb-3 border-black border-2">{item.name}</Text>
                 </TouchableOpacity>
             )}
         />
-        <TextInput
-            placeholder="Game Name"
-            value={game.name}
-            onChangeText={(text: string) => setGame({ ...game, name: text })}/>
-        <Button title="Save Game" onPress={handleSave} />
-      </View>
+        
+      </Container>
     );
 };

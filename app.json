@@ -27,7 +27,14 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-audio"
+      "expo-audio",
+      ["expo-font",
+      {
+        "fonts": [
+          "./assets/fonts/Cinzel-Regular.otf",
+          "./assets/fonts/Cinzel-Bold.otf"
+        ]
+      }]
     ]
   }
 }

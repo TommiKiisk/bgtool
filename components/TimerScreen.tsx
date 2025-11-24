@@ -4,6 +4,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TimerPickerModal } from 'react-native-timer-picker';
 import { useAudioPlayer } from "expo-audio";
 import { useNavigation } from '@react-navigation/native';
+import { MedievalButton } from './ui/MedievalButton';
+import { Container } from './ui/Container';
+import { Title } from './ui/Title';
 
 
 export default function TimerScreen() {
@@ -60,44 +63,30 @@ export default function TimerScreen() {
 
 
   return (
-    <View style={styles.container}>
+    <Container>
+      <Title>Timekeeper</Title>
 
-      <Text style={styles.time}>{formatTime(remaining)}</Text>
-      <View style={{ paddingBottom: 20 }}>
-        <Button 
-          title={isRunning ? "Pause" : "Start Turn"} 
+      <Text className='text-ink dark:text-gold font-medieval text-[70px] mb-3 text-bold text-center'>{formatTime(remaining)}</Text>
+      <View style={{ 
+        padding: 1,
+
+       }}>
+        <MedievalButton 
+          
+          label={isRunning ? "Pause" : "Start Turn"} 
           onPress={() => setIsRunning(!isRunning)} 
         />
 
-        <Button 
-          title="Next Turn" 
+        <MedievalButton 
+          label="Next Turn" 
           onPress={nextTurn} 
         />
-      </View>
       
-      <TouchableOpacity 
-        activeOpacity={0.7}
-        onPress={() => setShowPicker(true)}>
-        <View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setShowPicker(true)}>
-            <Text
-                style={{
-                  paddingVertical: 10,
-                  paddingHorizontal: 18,
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  fontSize: 16,
-                  overflow: "hidden",
-                  borderColor: "#007c48ff",
-                  color: "#05aca3ff"
-                  }}>
-              {"Set Time"}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
+      <MedievalButton 
+        label="Set Time" 
+        onPress={() => setShowPicker(true)} 
+      />
+      </View>
 
       <TimerPickerModal
         visible={showPicker}
@@ -139,9 +128,9 @@ export default function TimerScreen() {
           overlayOpacity: 0.2,
         }}
       />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
       
-    </View>
+    </Container>
   );
 }
 
@@ -154,8 +143,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   time: {
-    fontSize: 48,
+    fontSize: 70,
     marginBottom: 20,
+    marginTop: 1,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
+  button: {
+    fontSize: 20,
+    marginVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#728546ff',
+  }
 });

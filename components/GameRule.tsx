@@ -4,6 +4,8 @@ import { useRoute } from "@react-navigation/native";
 
 import { View, ScrollView, Text } from 'react-native';
 import { database } from '../firebaseConfig';
+import { Title } from './ui/Title';
+import { Container } from './ui/Container';
 
 
 
@@ -28,11 +30,11 @@ export default function GameRule() {
     }, [gameId]);
 
     return (
-        <View style={{ flex: 1 }}>
-            <Text>Game Rules</Text>
+        <Container>
+            <Title>Game Rules</Title>
         <ScrollView style={{ padding: 16 }}>
         </ScrollView>
-        </View>
+        </Container>
     );
 };
 
