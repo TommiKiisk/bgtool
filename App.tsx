@@ -11,6 +11,8 @@ import { Container } from './components/ui/Container';
 import { useEffect, useMemo, useState } from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { loadFonts } from './hooks/useFonts';
+import GameRuleScreen from './components/GameRule';
+import EditGameScreen from './components/EditGame';
 
 
 
@@ -26,6 +28,8 @@ export function HomeStack() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="RuleList" component={RuleListScreen} />
+      <Stack.Screen name="GameRule" component={GameRuleScreen} options={{headerShown: true}} />
+      <Stack.Screen name="EditGameRules" component={EditGameScreen} />
       <Stack.Screen name="DiceScreen" component={DiceScreen} />
       <Stack.Screen name="TimerScreen" component={TimerScreen} />
     </Stack.Navigator>

@@ -1,39 +1,56 @@
 import React, { use, useEffect, useState } from 'react';
 import { ref, push, set, onValue } from "firebase/database";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { View, ScrollView, Text } from 'react-native';
 import { database } from '../firebaseConfig';
 import { Title } from './ui/Title';
 import { Container } from './ui/Container';
+import { MedievalButton } from './ui/MedievalButton';
 
 
 
 export default function GameRule() {
 
     const route = useRoute();
+    const navigation = useNavigation<any>();
 
     const { gameId } = route.params as { gameId: string };
 
-    const [rules, setRules] = useState("");
+    const [game, setGame] = useState<{ name: string; rules: string } | null>(null);
 
     useEffect(() => {
-        
-        const rulesRef = ref( database, `games/${gameId}/rules` );
-        const unsubscribe = onValue(rulesRef, (snapshot) => {
-            const data = snapshot.val();
-            setRules(data || "No rules available.");
+        const gameRef = ref(database, `games/${gameId}`);
+        onValue(gameRef, (snapshot) => {
+        setGame(snapshot.val());
         });
-        
-        return () => unsubscribe();
-        
     }, [gameId]);
+
+    const goToEdit = () => {
+        navigation.navigate("EditGameRules", { gameId });
+    };
+
+    if (!game) { return (<Container><Text className="font-medieval text-ink dark:text-parchment">Loading...</Text></Container>); }
+
+    const paragraphs = game.rules.split('\n\n');
 
     return (
         <Container>
-            <Title>Game Rules</Title>
-        <ScrollView style={{ padding: 16 }}>
-        </ScrollView>
+            <Title>{game.name}</Title>
+
+            <MedievalButton label="Edit Rules" onPress={goToEdit} />
+
+            
+            <ScrollView className="mt-6">
+                {paragraphs.map((para, i) => (
+                <Text
+                    key={i}
+                    className="font-medieval text-lg leading-7 mb-6 text-ink dark:text-parchment"
+                >
+                    {para.trim()}
+                </Text>
+                ))}
+            </ScrollView>
         </Container>
     );
 };

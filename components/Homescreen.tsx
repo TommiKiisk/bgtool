@@ -10,10 +10,11 @@ import { Container } from "./ui/Container";
 
 
 type RootStackParamList = {
-    Home: undefined;
-    RuleList: undefined;
-    DiceScreen: undefined;
-    TimerScreen: undefined;
+  Home: undefined;
+  RuleList: undefined;
+  DiceScreen: undefined;
+  TimerScreen: undefined;
+  GameRule: { gameId: string };
 };
 
 type HomeNavProp = StackNavigationProp<RootStackParamList, 'Home'>;
