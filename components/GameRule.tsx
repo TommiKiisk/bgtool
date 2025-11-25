@@ -3,7 +3,7 @@ import { ref, push, set, onValue } from "firebase/database";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { View, ScrollView, Text } from 'react-native';
-import { database } from '../firebaseConfig';
+import { database } from '../config/firebase';
 import { Title } from './ui/Title';
 import { Container } from './ui/Container';
 import { MedievalButton } from './ui/MedievalButton';
@@ -38,7 +38,7 @@ export default function GameRule() {
         <Container>
             <Title>{game.name}</Title>
 
-            <MedievalButton label="Edit Rules" onPress={goToEdit} />
+            
 
             
             <ScrollView className="mt-6">
@@ -51,6 +51,7 @@ export default function GameRule() {
                 </Text>
                 ))}
             </ScrollView>
+            <MedievalButton label="Edit Rules" onPress={goToEdit} />
         </Container>
     );
 };

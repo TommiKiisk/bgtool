@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { onValue, ref, update } from "firebase/database";
 import React, { use, useEffect, useState } from 'react';
-import { database } from "../firebaseConfig";
+import { database } from "../config/firebase";
 import { Alert, Text, TextInput, View } from "react-native";
 import { Container } from "./ui/Container";
 import { Title } from "./ui/Title";
@@ -68,8 +68,9 @@ export default function EditGame() {
                 textAlignVertical="top"
             />
             <View className="w-full mt-4">
-                <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
+                <MedievalButton label="Scan Rules" onPress={() => navigation.navigate('Scanner')} />
                 <MedievalButton label="Save Changes" onPress={handleSave} />
+                <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
             </View>
         </Container>
 

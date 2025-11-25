@@ -28,13 +28,16 @@
     },
     "plugins": [
       "expo-audio",
-      ["expo-font",
-      {
-        "fonts": [
-          "./assets/fonts/Cinzel-Regular.otf",
-          "./assets/fonts/Cinzel-Bold.otf"
-        ]
-      }]
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Cinzel-Regular.otf",
+            "./assets/fonts/Cinzel-Bold.otf"
+          ]
+        }
+      ],
+      "react-native-vision-camera"
     ]
   }
 }

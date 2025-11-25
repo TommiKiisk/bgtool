@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, FlatList, Alert, TextInput, View, Button } from "react-native";
-import { database } from "../firebaseConfig";
+import { database } from "../config/firebase";
 import { useNavigation } from "@react-navigation/native";
 import { onValue, push, ref } from "firebase/database";
 import { Container } from "./ui/Container";
