@@ -13,6 +13,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { loadFonts } from './hooks/useFonts';
 import GameRuleScreen from './components/GameRule';
 import EditGameScreen from './components/EditGame';
+import ScannerScreen from './components/RuleScanner'
 
 
 
@@ -30,6 +31,7 @@ export function HomeStack() {
       <Stack.Screen name="RuleList" component={RuleListScreen} />
       <Stack.Screen name="GameRule" component={GameRuleScreen} options={{headerShown: true}} />
       <Stack.Screen name="EditGameRules" component={EditGameScreen} />
+      <Stack.Screen name="ScannerScreen" component={ScannerScreen} />
       <Stack.Screen name="DiceScreen" component={DiceScreen} />
       <Stack.Screen name="TimerScreen" component={TimerScreen} />
     </Stack.Navigator>
