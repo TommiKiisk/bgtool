@@ -17,6 +17,7 @@ import ScannerScreen from './components/RuleScanner'
 
 
 
+
 const Stack = createStackNavigator();
 
 

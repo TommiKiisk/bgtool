@@ -68,7 +68,7 @@ export default function EditGame() {
                 textAlignVertical="top"
             />
             <Container>
-                <MedievalButton label="Scan Rules" onPress={() => navigation.navigate('Scanner', { gameId })} />
+                <MedievalButton label="Scan Rules" onPress={() => navigation.navigate('ScannerScreen', {gameId} )} />
                 <MedievalButton label="Save Changes" onPress={handleSave} />
                 <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
             </Container>

@@ -11,16 +11,22 @@
 
  #### timer picker paketin opastus oli tosi hyödyllistä vaikka siinä näytettiin miten tehdä hälytyskello. Pienillä muutoksilla ja lisäämällä ajastinlogiikan sain sen ajastimeksi.
 
+ ## 22.11. 
+ #### sain tehtyä nopan iconilla, vaihdoin expo-av sta audioon. soittaa äänen jos ajastin menee nollaan.
+ #### stacknav homessa
 
+ ## 23.11.
+ #### sain firebase connectionin ja saa tallennettua pelin nimen
+ #### navigaatio toimii nyt sillee kuin haluan että on stack ja tab
+ #### tailwind ui yritys
 
+ ## 24.11.
+ #### perjatteessa koko päivä meni tailwindin oppimiseen
+ #### saa kirjoitettua sääntöjä peliin ja myös firebaseen
 
+ ## 25.11.
+ #### aloitin rulescannerin ja piti tehdä firebase app uusiks
 
- ## Lähteet:
+ ## 26.11.
 
- #### https://www.npmjs.com/package/react-native-timer-picker
-
- #### https://docs.expo.dev/versions/latest/sdk/av/
-
- #### https://haagahelia.github.io/mobilecourse/docs/intro
-
- #### https://archive.org/details/soundcloud-980363293
+ #### koko päivä scannerin yrityksiä yhdellä kirjastolla mutta selvisi ettei sillä saa buildattua eikä toimi expo gossa, sitteen kysyin AI-lta neuvoa ja ehdotti käyttää native mlkit-ocr ihan expo-cameran kanssa nyt melkein toimii ja saan palautettua nyt mutta build tulee myöhässä
