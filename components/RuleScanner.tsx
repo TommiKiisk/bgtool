@@ -4,6 +4,9 @@ import { runOnJS } from 'react-native-reanimated';
 import { performOcr } from '@bear-block/vision-camera-ocr';
 import { Text } from 'react-native';
 import { Container } from './ui/Container';
+import { useRoute } from '@react-navigation/native';
+import { database } from '../config/firebase';
+import { ref, set } from 'firebase/database';
 
 
 
@@ -11,7 +14,20 @@ export default function RuleScanner() {
     const {hasPermission , requestPermission } = useCameraPermission();
     const device = useCameraDevice('back');
     const [scannedText, setScannedText] = useState('');
-    const updateText = runOnJS((text: string) => setScannedText(text));
+
+    const route = useRoute();
+    const { gameId } = route.params as { gameId: string };
+    
+    const updateText = runOnJS((text: string) => {
+        setScannedText(text);
+        if (gameId && text) {
+            const gameRef = ref(database, `games/${gameId}/rules`);
+            set(gameRef, text)
+                .then(() => console.log('Rules saved!'))
+                .catch(err => console.error('Error saving rules:', err));
+        }
+    });    
+    
     const frameProcessor = useFrameProcessor((frame) => {
         'worklet';
         const result = performOcr(frame);
@@ -22,9 +38,9 @@ export default function RuleScanner() {
 
 
     if (!hasPermission) {
-        return <Text onPress={requestPermission}>Grant Camera Permission</Text>;
+        return <Text className='font-medieval text-ink dark:text-parchment' onPress={requestPermission}>Grant Camera Permission</Text>;
     }
-    if (!device) return <Text>No camera</Text>
+    if (!device) return <Text className='font-medieval text-ink dark:text-parchment'>No camera</Text>
     
 
     return (
@@ -39,7 +55,7 @@ export default function RuleScanner() {
 
             {scannedText ? (
                 <Container>
-                    <Text>{scannedText}</Text>
+                    <Text className='font-medieval text-ink dark:text-parchment'>{scannedText}</Text>
                 </Container>
             ) : null}
         </Container>

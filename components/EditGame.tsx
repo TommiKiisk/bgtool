@@ -67,11 +67,11 @@ export default function EditGame() {
                 multiline
                 textAlignVertical="top"
             />
-            <View className="w-full mt-4">
-                <MedievalButton label="Scan Rules" onPress={() => navigation.navigate('Scanner')} />
+            <Container>
+                <MedievalButton label="Scan Rules" onPress={() => navigation.navigate('Scanner', { gameId })} />
                 <MedievalButton label="Save Changes" onPress={handleSave} />
                 <MedievalButton label="Go back" onPress={() => navigation.goBack()} />
-            </View>
+            </Container>
         </Container>
 
     );
