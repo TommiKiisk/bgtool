@@ -43,7 +43,6 @@ export function MedievalButton({ label, onPress, disabled, loading }: ButtonProp
             text-gold dark:text-gold
             font-medieval
             text-3xl
-            font-bold
             text-center
           ">
             {label}
