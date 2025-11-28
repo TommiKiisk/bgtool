@@ -14,7 +14,7 @@ module.exports = {
         parchment: "#cec2a4ff",
         ink: "#3a2e2a",
         moss: "#728546ff",
-        blood: "#7b2e2f",
+        blood: "#8d3335ff",
         wood: "#5a4632",
         gold: "#d4af37",
       },

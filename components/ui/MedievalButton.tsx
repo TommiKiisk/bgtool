@@ -46,6 +46,7 @@ export function MedievalButton({ label, onPress, disabled, loading }: ButtonProp
             font-bold
             text-center
           ">
+            {label}
         </Text>
       )}
     </Pressable>

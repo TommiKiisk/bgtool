@@ -54,6 +54,7 @@ export default function EditGame() {
             <TextInput
                 className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink"
                 placeholder="Game Name"
+                placeholderTextColor="#d4af37"
                 value={name}
                 onChangeText={setName}
             />
@@ -62,6 +63,7 @@ export default function EditGame() {
             <TextInput
                 className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink"
                 placeholder="Game Rules"
+                placeholderTextColor="#d4af37"
                 value={rules}
                 onChangeText={setRules}
                 multiline

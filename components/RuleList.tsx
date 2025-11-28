@@ -52,8 +52,9 @@ export default function RuleList() {
         <View className="w-full mb-6">
             <Text className="font-medieval text-lg mb-1">Add a new game:</Text>
         <TextInput
-            className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink dark:text-parchment"
+            className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink"
             placeholder="Game Name"
+            placeholderTextColor="#d4af37"
             value={game.name}
             onChangeText={(text: string) => setGame({ ...game, name: text })}/>
 
