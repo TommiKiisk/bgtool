@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { Alert, Text, StyleSheet } from 'react-native';
+import { Alert, Text, StyleSheet, View, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Container } from './ui/Container';
 import { useRoute } from '@react-navigation/native';
 import { database } from '../config/firebase';
 import { ref, set } from 'firebase/database';
-import MlkitOcr from 'react-native-mlkit-ocr';
+import MlkitOcr from 'expo-mlkit-ocr';
+
+
+declare module 'expo-mlkit-ocr' {
+    interface ExpoMlkitOcrModule {
+    detectFromUri(uri: string): Promise<Array<{ text: string; confidence: number; boundingBox: { x: number; y: number; width: number; height: number } }>>;
+    }
+}
 
 export default function RuleScanner() {
     const [permission, requestPermission] = useCameraPermissions();
@@ -17,7 +24,6 @@ export default function RuleScanner() {
     const { gameId } = route.params as { gameId: string };
 
     const cameraRef = useRef<CameraView>(null);
-    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {
         if (permission === null) {
@@ -47,7 +53,6 @@ export default function RuleScanner() {
 
                 if (cleanText) {
                     setScannedText(cleanText);
-                    stopScanning();
                 }
             }
         } catch (error) {
@@ -58,39 +63,27 @@ export default function RuleScanner() {
         }
     };
 
-    const startScanning = () => {
-        if (intervalRef.current) return;
+    const takeAndScanPhoto = async () => {
+        if (!cameraRef.current || isProcessing) return;
 
-        intervalRef.current = setInterval(async () => {
-            if (!cameraRef.current) return;
-            try {
-                const photo = await cameraRef.current.takePictureAsync({
-                    quality: 0.7,
-                    skipProcessing: true,
-                });
+        try {
+            const photo = await cameraRef.current.takePictureAsync({
+                quality: 0.8,
+                skipProcessing: true,
+            });
 
-                if (photo?.uri) {
-                    await processImageWithOCR(photo.uri);
-                }
-            } catch (err) {
-                console.log('Photo capture failed:', err);
+            if (photo?.uri) {
+                await processImageWithOCR(photo.uri);
             }
-        }, 2200);
-    };
-
-    const stopScanning = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
+        } catch (err) {
+            console.log('Photo capture failed:', err);
+            Alert.alert('Camera Error', 'Could not take photo.');
         }
     };
 
-    useEffect(() => {
-        if (permission?.granted && cameraReady) {
-            startScanning();
-        }
-        return () => stopScanning();
-    }, [permission, cameraReady]);
+    
+
+    
 
     if (permission === null) {
         return <Text className='font-medieval text-ink dark:text-parchment'>Requesting camera permission</Text>;
@@ -116,13 +109,33 @@ export default function RuleScanner() {
                 style={{ width: '100%', height: 400 }}
                 ratio="16:9"
                 onCameraReady={() => setCameraReady(true)}
+                facing="back"
             />
 
-            {scannedText ? (
-                <Container>
-                    <Text className='font-medieval text-ink dark:text-parchment'>{scannedText}</Text>
-                </Container>
-            ) : null}
+            <View className="px-6 mb-6">
+                <TouchableOpacity
+                    onPress={takeAndScanPhoto}
+                    disabled={!cameraReady || isProcessing}
+                    className={`py-5 rounded-xl items-center justify-center ${
+                        cameraReady && !isProcessing
+                            ? 'bg-amber-600 active:bg-amber-700'
+                            : 'bg-gray-500'
+                    }`}
+                >
+                    {isProcessing ? (
+                        <View className="flex-row items-center gap-3">
+                            <ActivityIndicator color="#f5e6d3" size="small" />
+                            <Text className="font-medieval text-parchment text-xl">
+                                Scanning...
+                            </Text>
+                        </View>
+                    ) : (
+                        <Text className="font-medieval text-parchment text-xl">
+                            Scan Page
+                        </Text>
+                    )}
+                </TouchableOpacity>
+            </View>
         </Container>
     );
 }
