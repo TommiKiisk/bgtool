@@ -5,14 +5,9 @@ import { Container } from './ui/Container';
 import { useRoute } from '@react-navigation/native';
 import { database } from '../config/firebase';
 import { ref, set } from 'firebase/database';
-import MlkitOcr from 'expo-mlkit-ocr';
+import TextExtractor from 'expo-text-extractor';
 
 
-declare module 'expo-mlkit-ocr' {
-    interface ExpoMlkitOcrModule {
-    detectFromUri(uri: string): Promise<Array<{ text: string; confidence: number; boundingBox: { x: number; y: number; width: number; height: number } }>>;
-    }
-}
 
 export default function RuleScanner() {
     const [permission, requestPermission] = useCameraPermissions();
@@ -45,19 +40,17 @@ export default function RuleScanner() {
         setIsProcessing(true);
 
         try {
-            const result = await MlkitOcr.detectFromUri(photoUri);
+            const textArray = await TextExtractor.extractTextFromImage(photoUri);
 
-            if (result && result.length > 0) {
-                const allText = result.map(block => block.text).join('\n');
-                const cleanText = allText.trim();
+            if (Array.isArray(textArray) && textArray.length > 0) {
+                const allText = textArray.join('\n').trim();
+                setScannedText(allText)
 
-                if (cleanText) {
-                    setScannedText(cleanText);
-                }
+                
             }
         } catch (error) {
             console.error('OCR Error:', error);
-            Alert.alert('OCR Failed', 'Could not read text. Try again with clearer image.');
+            Alert.alert('OCR Failed', 'Could not read text.');
         } finally {
             setIsProcessing(false);
         }
