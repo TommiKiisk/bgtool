@@ -30,7 +30,7 @@ export default function GameRule() {
         navigation.navigate("EditGameRules", { gameId });
     };
 
-    if (!game) { return (<Container><Text className="font-medieval text-ink dark:text-parchment">Loading...</Text></Container>); }
+    if (!game) { return (<Container><Text className="font-medieval text-ink">Loading...</Text></Container>); }
 
     const paragraphs = game.rules.split('\n\n');
 
@@ -45,7 +45,7 @@ export default function GameRule() {
                 {paragraphs.map((para, i) => (
                 <Text
                     key={i}
-                    className="font-medieval text-lg leading-7 mb-6 text-ink dark:text-parchment"
+                    className="font-medieval text-lg leading-7 mb-6 text-ink"
                 >
                     {para.trim()}
                 </Text>

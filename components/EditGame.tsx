@@ -52,7 +52,7 @@ export default function EditGame() {
             <Title>Edit {name || "Game"}</Title>
             <Text className="font-medieval text-lg mb-1 mt-6">Game Name:</Text>
             <TextInput
-                className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink dark:text-parchment"
+                className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink"
                 placeholder="Game Name"
                 value={name}
                 onChangeText={setName}
@@ -60,7 +60,7 @@ export default function EditGame() {
 
             <Text className="font-medieval text-lg mb-1">Game Rules:</Text>
             <TextInput
-                className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink dark:text-parchment"
+                className=" border-2 border-black w-full p-2 mt-2 mb-6 font-medieval text-ink"
                 placeholder="Game Rules"
                 value={rules}
                 onChangeText={setRules}

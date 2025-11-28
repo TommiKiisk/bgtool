@@ -11,7 +11,7 @@ export function Title({ children }: TitleProps) {
       className="
         text-5xl
         font-medieval
-        text-ink dark:text-parchment
+        text-ink
         
         text-center
         p-6
